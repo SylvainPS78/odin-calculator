@@ -1,29 +1,7 @@
-//function Calculator() {
-    this.methods = {
-        "+": (a,b) => a + b,
-        "-": (a,b) => a - b,
-        "/": (a,b) => a / b,
-        "*": (a,b) => a * b,
-    }
-
-    this.calculate = function(str) {
-        let split = str.split(" ");
-        a = +split[0];
-        op = split[1];
-        b = +split[2];
-
-        if (!this.methods[op] || isNaN(a) || isNaN(b)) {
-            return NaN // Changer le message d'erreur
-        }
-
-        return this.methods[op](a,b);
-    }
-//}
-//let userInput = prompt("entrer une formule");
-//let myCalculator = new Calculator();
-//console.log(myCalculator.calculate(userInput));
-
-
+const buttons = document.querySelector("#buttons");
+const tempDisplay = document.querySelector("#temp-display");
+const mainDisplay = document.querySelector("#main-display");
+let operatorUsed = 0;
 
 function add(a,b){
     return a + b;
@@ -38,18 +16,111 @@ function divide(a,b){
     return a / b;
 }
 
-//let number1 = parseFloat(prompt("Nombre 1 ?"));
-//let operator = prompt("Opérateur ?");
-//let number2 = parseFloat(prompt("Nombre 2 ?"));
+buttons.addEventListener("click", (event) => {
+    const target = event.target;
+    let buttonValue ="";
 
+    if (target.classList.contains("button")) {
+        buttonValue = target.textContent;
+    }
+
+    handleButtonClick(buttonValue);
+});
+
+function handleButtonClick(value) {
+    switch (value){
+        case "0":
+            tempDisplay.textContent += 0;
+            break;
+        case "1":
+            tempDisplay.textContent += 1;
+            break;
+        case "2":
+            tempDisplay.textContent += 2;
+            break;
+        case "3":
+            tempDisplay.textContent += 3;
+            break;
+        case "4":
+            tempDisplay.textContent += 4;
+            break;
+        case "5":
+            tempDisplay.textContent += 5;
+            break;
+        case "6":
+            tempDisplay.textContent += 6;
+            break;
+        case "7":
+            tempDisplay.textContent += 7;
+            break;
+        case "8":
+            tempDisplay.textContent += 8;
+            break;
+        case "9":
+            tempDisplay.textContent += 9;
+            break;
+        case "+/-":
+            tempDisplay.textContent += "-"; //A COMPLETER
+            break;
+        case ",":
+            tempDisplay.textContent += ".";
+            break;
+        case "%":
+            if (operatorUsed >= 1) {
+                mainDisplay.textContent = calculateResult(tempDisplay.textContent);
+                tempDisplay.textContent = mainDisplay.textContent;
+            }
+            tempDisplay.textContent += " / ";
+            operatorUsed += 1;
+            break;
+        case "x":
+            if (operatorUsed >= 1) {
+                mainDisplay.textContent = calculateResult(tempDisplay.textContent);
+                tempDisplay.textContent = mainDisplay.textContent;
+            }
+            tempDisplay.textContent += " x ";
+            operatorUsed += 1;
+            break;
+        case "-":
+            if (operatorUsed >= 1) {
+                mainDisplay.textContent = calculateResult(tempDisplay.textContent);
+                tempDisplay.textContent = mainDisplay.textContent;
+            }
+            tempDisplay.textContent += " - ";
+            operatorUsed += 1;
+            break;
+        case "+":
+            if (operatorUsed >= 1) {
+                mainDisplay.textContent = calculateResult(tempDisplay.textContent);
+                tempDisplay.textContent = mainDisplay.textContent;
+            }
+            tempDisplay.textContent += " + ";
+            operatorUsed += 1;
+            break;
+        case "=":
+            tempDisplay.textContent += " = ";
+            mainDisplay.textContent = calculateResult(tempDisplay.textContent);
+            break;
+    }
+}
 
 function operate(op,a,b){
     if (op === "+"){return add(a,b)}
     else if (op === "-"){return subtract(a,b)}
     else if (op === "/"){return divide(a,b)}
-    else if (op === "*"){return multiply(a,b)}
+    else if (op === "x"){return multiply(a,b)}
 }
 
-//console.log(operate(operator,number1,number2));
+function calculateResult(str) {
+    let splitStr = str.split(" ");
+    const regex = /[+\-/x]/;
+    a = +splitStr[0];
+    op = splitStr[1];
+    b = +splitStr[2]; 
 
+    if (!regex.test(op) || isNaN(a) || isNaN(b)) {
+        return NaN;
+    }
+    return operate(op,a,b);
+}
 
