@@ -151,6 +151,10 @@ function calculateResult(str) {
     op = splitStr[1];
     b = +splitStr[2]; 
 
+    if (op === "/" && b === 0) {
+        return "Error: div/0";
+    }
+
     let result = operate(op,a,b);
     let resultStr = result.toString();
     if (resultStr.length > maxDisplay) {
