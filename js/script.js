@@ -126,6 +126,10 @@ function handleButtonClick(value) {
             mainDisplay.textContent = calculateResult(tempDisplay.textContent);
             tempDisplay.textContent += " = ";
             break;
+        case "C":
+            mainDisplay.textContent = "0";
+            tempDisplay.textContent = "";
+            operatorUsed=0;
     }
 }
 
