@@ -3,6 +3,7 @@ const tempDisplay = document.querySelector("#temp-display");
 const mainDisplay = document.querySelector("#main-display");
 let operatorUsed = 0;
 let maxDisplay = 11;
+const regex = /[+\-/x=]/;
 
 function add(a,b){
     return a + b;
@@ -71,6 +72,10 @@ function handleButtonClick(value) {
             tempDisplay.textContent += ".";
             break;
         case "%":
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                tempDisplay.textContent = mainDisplay.textContent + " / ";
+                break;
+            }
             if (operatorUsed >= 1) {
                 mainDisplay.textContent = calculateResult(tempDisplay.textContent);
                 tempDisplay.textContent = mainDisplay.textContent;
@@ -79,6 +84,10 @@ function handleButtonClick(value) {
             operatorUsed += 1;
             break;
         case "x":
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                tempDisplay.textContent = mainDisplay.textContent + " x ";
+                break;
+            }
             if (operatorUsed >= 1) {
                 mainDisplay.textContent = calculateResult(tempDisplay.textContent);
                 tempDisplay.textContent = mainDisplay.textContent;
@@ -87,6 +96,10 @@ function handleButtonClick(value) {
             operatorUsed += 1;
             break;
         case "-":
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                tempDisplay.textContent = mainDisplay.textContent + " - ";
+                break;
+            }
             if (operatorUsed >= 1) {
                 mainDisplay.textContent = calculateResult(tempDisplay.textContent);
                 tempDisplay.textContent = mainDisplay.textContent;
@@ -95,6 +108,10 @@ function handleButtonClick(value) {
             operatorUsed += 1;
             break;
         case "+":
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                tempDisplay.textContent = mainDisplay.textContent + " + ";
+                break;
+            }
             if (operatorUsed >= 1) {
                 mainDisplay.textContent = calculateResult(tempDisplay.textContent);
                 tempDisplay.textContent = mainDisplay.textContent;
@@ -103,14 +120,20 @@ function handleButtonClick(value) {
             operatorUsed += 1;
             break;
         case "=":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 1]=="=") {break}
-            tempDisplay.textContent += " =";
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="=" ||
+                tempDisplay.textContent === "")
+                 {break}
             mainDisplay.textContent = calculateResult(tempDisplay.textContent);
+            tempDisplay.textContent += " = ";
             break;
     }
 }
 
 function operate(op,a,b){
+    if (b==""){
+        b = a;
+        tempDisplay.textContent += b;
+    }
     if (op === "+"){return add(a,b)}
     else if (op === "-"){return subtract(a,b)}
     else if (op === "/"){return divide(a,b)}
@@ -120,7 +143,6 @@ function operate(op,a,b){
 
 function calculateResult(str) {
     let splitStr = str.split(" ");
-    const regex = /[+\-/x=]/;
     a = +splitStr[0];
     op = splitStr[1];
     b = +splitStr[2]; 
