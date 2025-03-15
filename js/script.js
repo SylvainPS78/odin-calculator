@@ -38,9 +38,9 @@ function divide(a,b){
     return a / b;
 }
 
-let number1 = parseFloat(prompt("Nombre 1 ?"));
-let operator = prompt("Opérateur ?");
-let number2 = parseFloat(prompt("Nombre 2 ?"));
+//let number1 = parseFloat(prompt("Nombre 1 ?"));
+//let operator = prompt("Opérateur ?");
+//let number2 = parseFloat(prompt("Nombre 2 ?"));
 
 
 function operate(op,a,b){
@@ -50,6 +50,6 @@ function operate(op,a,b){
     else if (op === "*"){return multiply(a,b)}
 }
 
-console.log(operate(operator,number1,number2));
+//console.log(operate(operator,number1,number2));
 
 
