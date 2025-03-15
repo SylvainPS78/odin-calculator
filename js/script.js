@@ -17,6 +17,10 @@ function divide(a,b){
     return a / b;
 }
 
+function equal(a) {
+    return a;
+}
+
 buttons.addEventListener("click", (event) => {
     const target = event.target;
     let buttonValue ="";
@@ -99,7 +103,8 @@ function handleButtonClick(value) {
             operatorUsed += 1;
             break;
         case "=":
-            tempDisplay.textContent += " = ";
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 1]=="=") {break}
+            tempDisplay.textContent += " =";
             mainDisplay.textContent = calculateResult(tempDisplay.textContent);
             break;
     }
@@ -110,24 +115,21 @@ function operate(op,a,b){
     else if (op === "-"){return subtract(a,b)}
     else if (op === "/"){return divide(a,b)}
     else if (op === "x"){return multiply(a,b)}
+    else if (op === "="){return equal(a)}
 }
 
 function calculateResult(str) {
     let splitStr = str.split(" ");
-    const regex = /[+\-/x]/;
+    const regex = /[+\-/x=]/;
     a = +splitStr[0];
     op = splitStr[1];
     b = +splitStr[2]; 
 
-    if (!regex.test(op) || isNaN(a) || isNaN(b)) {
-        return NaN;
-    }
     let result = operate(op,a,b);
     let resultStr = result.toString();
     if (resultStr.length > maxDisplay) {
         resultStr = resultStr.slice(0,maxDisplay)
     }
-
     return resultStr;
 }
 

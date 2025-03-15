@@ -31,6 +31,7 @@ main {
     background-color: var(--dark-grey);
     color:var(--text-color);
     width:300px;
+    min-width: 300px;
     display:grid;
     grid-template-rows: 50fr repeat(6, 100fr);
     grid-template-columns: repeat(4,1fr);
