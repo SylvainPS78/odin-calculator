@@ -2,6 +2,7 @@ const buttons = document.querySelector("#buttons");
 const tempDisplay = document.querySelector("#temp-display");
 const mainDisplay = document.querySelector("#main-display");
 let operatorUsed = 0;
+let maxDisplay = 11;
 
 function add(a,b){
     return a + b;
@@ -121,6 +122,12 @@ function calculateResult(str) {
     if (!regex.test(op) || isNaN(a) || isNaN(b)) {
         return NaN;
     }
-    return operate(op,a,b);
+    let result = operate(op,a,b);
+    let resultStr = result.toString();
+    if (resultStr.length > maxDisplay) {
+        resultStr = resultStr.slice(0,maxDisplay)
+    }
+
+    return resultStr;
 }
 
