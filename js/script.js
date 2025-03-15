@@ -71,6 +71,7 @@ function handleButtonClick(value) {
         case ",":
             tempDisplay.textContent += ".";
             break;
+        // Mettre un 0 en début de ligne si j'appuie sur un opérateur alors que tempDisplay est vide
         case "%":
             if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
                 tempDisplay.textContent = mainDisplay.textContent + " / ";
@@ -131,6 +132,7 @@ function handleButtonClick(value) {
             tempDisplay.textContent = "";
             operatorUsed=0;
     }
+    //programmer les boutons manquants
 }
 
 function operate(op,a,b){
