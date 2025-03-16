@@ -4,7 +4,7 @@ const mainDisplay = document.querySelector("#main-display");
 let operatorUsed = 0;
 const maxDisplay = 11; /*Taille max des nombres sur l'écran*/
 let dotCount = 0;
-const regex = /[+\-/x=]/;
+const regex = /[+\-/x]/;
 
 function add(a,b){
     return a + b;
@@ -236,6 +236,15 @@ function handleButtonClick(value) {
             tempDisplay.textContent = "";
             operatorUsed=0;
             dotCount=0;
+        case "DEL":
+            if (/[0-9]/.test(tempDisplay.textContent[tempDisplay.textContent.length - 1])){
+                tempDisplay.textContent=tempDisplay.textContent.slice(0,tempDisplay.textContent.length-1);
+                break;
+            }
+            else if (/[\.]/.test(tempDisplay.textContent[tempDisplay.textContent.length - 1])){
+                tempDisplay.textContent=tempDisplay.textContent.slice(0,tempDisplay.textContent.length-1);
+                dotCount=0;
+                break;}
     }
     //programmer les boutons manquants
 }
