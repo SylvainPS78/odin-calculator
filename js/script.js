@@ -127,7 +127,6 @@ function handleButtonClick(value) {
                     break;
                 }
             }
-
             else if (operatorUsed > 0 && tempDisplay.textContent[tempDisplay.textContent.length - 2]!=="=") {
                 let tempString = tempDisplay.textContent.split(" ");
                 let num1 = tempString[0];
@@ -136,7 +135,6 @@ function handleButtonClick(value) {
                 tempDisplay.textContent = `${num1} ${operator} ${-num2}`;
                 break;
             }
-
             else {
                 if (mainDisplay.textContent[0]==="-") {
                     mainDisplay.textContent = mainDisplay.textContent.slice(1);
@@ -146,7 +144,6 @@ function handleButtonClick(value) {
                     break;
                 }
             }
-
             break;
         case ",":
             if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
@@ -165,7 +162,6 @@ function handleButtonClick(value) {
                 tempDisplay.textContent = `${num1} ${operator} 0.`;
                 break;
             }
-
             if (tempDisplay.textContent[tempDisplay.textContent.length-1] !=="." && dotCount < 1){
                 tempDisplay.textContent += ".";
                 dotCount++;
@@ -174,11 +170,7 @@ function handleButtonClick(value) {
             else {
                 break;
             }
-
-
             break;
-        // Mettre un 0 en début de ligne si j'appuie sur un opérateur alors que tempDisplay est vide
-        // un seule virgule
         case "%":
             if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
                 tempDisplay.textContent = mainDisplay.textContent + " / ";
