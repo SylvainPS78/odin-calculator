@@ -237,7 +237,7 @@ function handleButtonClick(value) {
                 tempDisplay.textContent=tempDisplay.textContent.slice(0,tempDisplay.textContent.length-1);
                 break;
             }
-            else if (/[\.]/.test(tempDisplay.textContent[tempDisplay.textContent.length - 1])){
+            else if (/[\.\-]/.test(tempDisplay.textContent[tempDisplay.textContent.length - 1])){
                 tempDisplay.textContent=tempDisplay.textContent.slice(0,tempDisplay.textContent.length-1);
                 dotCount=0;
                 break;}
