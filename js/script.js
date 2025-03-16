@@ -2,7 +2,8 @@ const buttons = document.querySelector("#buttons");
 const tempDisplay = document.querySelector("#temp-display");
 const mainDisplay = document.querySelector("#main-display");
 let operatorUsed = 0;
-let maxDisplay = 11; /*Taille max des nombres sur l'écran*/
+const maxDisplay = 11; /*Taille max des nombres sur l'écran*/
+let dotCount = 0;
 const regex = /[+\-/x=]/;
 
 function add(a,b){
@@ -148,9 +149,36 @@ function handleButtonClick(value) {
 
             break;
         case ",":
-            tempDisplay.textContent += ".";
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                mainDisplay.textContent = "0";
+                tempDisplay.textContent = "";
+                operatorUsed=0;
+                dotCount=0;
+            }
+            if (tempDisplay.textContent === "") {
+                tempDisplay.textContent += 0;
+            };
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 1] ==" "){
+                let tempString = tempDisplay.textContent.split(" ");
+                let num1 = tempString[0];
+                let operator = tempString[1];
+                tempDisplay.textContent = `${num1} ${operator} 0.`;
+                break;
+            }
+
+            if (tempDisplay.textContent[tempDisplay.textContent.length-1] !=="." && dotCount < 1){
+                tempDisplay.textContent += ".";
+                dotCount++;
+                break;
+            }
+            else {
+                break;
+            }
+
+
             break;
         // Mettre un 0 en début de ligne si j'appuie sur un opérateur alors que tempDisplay est vide
+        // un seule virgule
         case "%":
             if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
                 tempDisplay.textContent = mainDisplay.textContent + " / ";
@@ -161,6 +189,7 @@ function handleButtonClick(value) {
                 tempDisplay.textContent = mainDisplay.textContent;
             }
             tempDisplay.textContent += " / ";
+            dotCount=0;
             operatorUsed += 1;
             break;
         case "x":
@@ -173,6 +202,7 @@ function handleButtonClick(value) {
                 tempDisplay.textContent = mainDisplay.textContent;
             }
             tempDisplay.textContent += " x ";
+            dotCount=0;
             operatorUsed += 1;
             break;
         case "-":
@@ -186,6 +216,7 @@ function handleButtonClick(value) {
             }
             tempDisplay.textContent += " - ";
             operatorUsed += 1;
+            dotCount=0;
             break;
         case "+":
             if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
@@ -197,6 +228,7 @@ function handleButtonClick(value) {
                 tempDisplay.textContent = mainDisplay.textContent;
             }
             tempDisplay.textContent += " + ";
+            dotCount=0;
             operatorUsed += 1;
             break;
         case "=":
@@ -205,11 +237,13 @@ function handleButtonClick(value) {
                  {break}
             mainDisplay.textContent = calculateResult(tempDisplay.textContent);
             tempDisplay.textContent += " = ";
+            dotCount=0;
             break;
         case "C":
             mainDisplay.textContent = "0";
             tempDisplay.textContent = "";
             operatorUsed=0;
+            dotCount=0;
     }
     //programmer les boutons manquants
 }
