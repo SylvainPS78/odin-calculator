@@ -2,7 +2,7 @@ const buttons = document.querySelector("#buttons");
 const tempDisplay = document.querySelector("#temp-display");
 const mainDisplay = document.querySelector("#main-display");
 let operatorUsed = 0;
-let maxDisplay = 11;
+let maxDisplay = 11; /*Taille max des nombres sur l'écran*/
 const regex = /[+\-/x=]/;
 
 function add(a,b){
@@ -33,36 +33,87 @@ buttons.addEventListener("click", (event) => {
     handleButtonClick(buttonValue);
 });
 
+
 function handleButtonClick(value) {
     switch (value){
         case "0":
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                mainDisplay.textContent = "0";
+                tempDisplay.textContent = "";
+                operatorUsed=0;
+            }
             tempDisplay.textContent += 0;
             break;
         case "1":
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                mainDisplay.textContent = "0";
+                tempDisplay.textContent = "";
+                operatorUsed=0;
+            }
             tempDisplay.textContent += 1;
             break;
         case "2":
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                mainDisplay.textContent = "0";
+                tempDisplay.textContent = "";
+                operatorUsed=0;
+            }
             tempDisplay.textContent += 2;
             break;
         case "3":
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                mainDisplay.textContent = "0";
+                tempDisplay.textContent = "";
+                operatorUsed=0;
+            }
             tempDisplay.textContent += 3;
             break;
         case "4":
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                mainDisplay.textContent = "0";
+                tempDisplay.textContent = "";
+                operatorUsed=0;
+            }
             tempDisplay.textContent += 4;
             break;
         case "5":
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                mainDisplay.textContent = "0";
+                tempDisplay.textContent = "";
+                operatorUsed=0;
+            }
             tempDisplay.textContent += 5;
             break;
         case "6":
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                mainDisplay.textContent = "0";
+                tempDisplay.textContent = "";
+                operatorUsed=0;
+            }
             tempDisplay.textContent += 6;
             break;
         case "7":
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                mainDisplay.textContent = "0";
+                tempDisplay.textContent = "";
+                operatorUsed=0;
+            }
             tempDisplay.textContent += 7;
             break;
         case "8":
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                mainDisplay.textContent = "0";
+                tempDisplay.textContent = "";
+                operatorUsed=0;
+            }
             tempDisplay.textContent += 8;
             break;
         case "9":
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                mainDisplay.textContent = "0";
+                tempDisplay.textContent = "";
+                operatorUsed=0;
+            }
             tempDisplay.textContent += 9;
             break;
         case "+/-":
