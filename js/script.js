@@ -36,43 +36,11 @@ function handleButtonClick(value) {
         tempDisplay.textContent = "";
         operatorUsed=0;
     }
+    if (/[0-9]/.test(value)) {
+        tempDisplay.textContent += value;
+    }
     
     switch (value){
-        case "0":
-            tempDisplay.textContent += 0;
-            break;
-        case "1":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
-                mainDisplay.textContent = "0";
-                tempDisplay.textContent = "";
-                operatorUsed=0;
-            }
-            tempDisplay.textContent += 1;
-            break;
-        case "2":
-            tempDisplay.textContent += 2;
-            break;
-        case "3":
-            tempDisplay.textContent += 3;
-            break;
-        case "4":
-            tempDisplay.textContent += 4;
-            break;
-        case "5":
-            tempDisplay.textContent += 5;
-            break;
-        case "6":
-            tempDisplay.textContent += 6;
-            break;
-        case "7":
-            tempDisplay.textContent += 7;
-            break;
-        case "8":
-            tempDisplay.textContent += 8;
-            break;
-        case "9":
-            tempDisplay.textContent += 9;
-            break;
         case "+/-":
             if (operatorUsed == 0){
                 if (tempDisplay.textContent[0]==="-") {
