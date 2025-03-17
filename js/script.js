@@ -4,7 +4,7 @@ const mainDisplay = document.querySelector("#main-display");
 let operatorUsed = 0;
 const maxDisplay = 11; /*Taille max des nombres sur l'écran*/
 let dotCount = 0;
-const regex = /[+\-/x]/;
+const regexOperator = /[+\-/x]/;
 
 function add(a,b){
     return a + b;
@@ -176,7 +176,13 @@ function handleButtonClick(value) {
                 tempDisplay.textContent = mainDisplay.textContent + " / ";
                 break;
             }
-            if (regex.test(tempDisplay.textContent[tempDisplay.textContent.length - 2])) {
+            if (/[0-9\.]/.test(tempDisplay.textContent[tempDisplay.textContent.length - 1]) && operatorUsed >=1 ){
+                mainDisplay.textContent = calculateResult(tempDisplay.textContent);
+                tempDisplay.textContent = mainDisplay.textContent + " / ";
+                dotCount=0;
+                break;
+            }
+            if (regexOperator.test(tempDisplay.textContent[tempDisplay.textContent.length - 2])) {
                 tempDisplay.textContent = tempDisplay.textContent.slice(0,tempDisplay.textContent.length-3)
             }
             tempDisplay.textContent += " / ";
@@ -188,7 +194,13 @@ function handleButtonClick(value) {
                 tempDisplay.textContent = mainDisplay.textContent + " x ";
                 break;
             }
-            if (regex.test(tempDisplay.textContent[tempDisplay.textContent.length - 2])) {
+            if (/[0-9\.]/.test(tempDisplay.textContent[tempDisplay.textContent.length - 1]) && operatorUsed >=1 ){
+                mainDisplay.textContent = calculateResult(tempDisplay.textContent);
+                tempDisplay.textContent = mainDisplay.textContent + " x ";
+                dotCount=0;
+                break;
+            }
+            if (regexOperator.test(tempDisplay.textContent[tempDisplay.textContent.length - 2])) {
                 tempDisplay.textContent = tempDisplay.textContent.slice(0,tempDisplay.textContent.length-3)
             }
             tempDisplay.textContent += " x ";
@@ -200,7 +212,13 @@ function handleButtonClick(value) {
                 tempDisplay.textContent = mainDisplay.textContent + " - ";
                 break;
             }
-            if (regex.test(tempDisplay.textContent[tempDisplay.textContent.length - 2])) {
+            if (/[0-9\.]/.test(tempDisplay.textContent[tempDisplay.textContent.length - 1]) && operatorUsed >=1 ){
+                mainDisplay.textContent = calculateResult(tempDisplay.textContent);
+                tempDisplay.textContent = mainDisplay.textContent + " - ";
+                dotCount=0;
+                break;
+            }
+            if (regexOperator.test(tempDisplay.textContent[tempDisplay.textContent.length - 2])) {
                 tempDisplay.textContent = tempDisplay.textContent.slice(0,tempDisplay.textContent.length-3)
             }
             tempDisplay.textContent += " - ";
@@ -210,9 +228,16 @@ function handleButtonClick(value) {
         case "+":
             if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
                 tempDisplay.textContent = mainDisplay.textContent + " + ";
+                operatorUsed += 1;
                 break;
             }
-            if (regex.test(tempDisplay.textContent[tempDisplay.textContent.length - 2])) {
+            if (/[0-9\.]/.test(tempDisplay.textContent[tempDisplay.textContent.length - 1]) && operatorUsed >=1 ){
+                mainDisplay.textContent = calculateResult(tempDisplay.textContent);
+                tempDisplay.textContent = mainDisplay.textContent + " + ";
+                dotCount=0;
+                break;
+            }
+            if (regexOperator.test(tempDisplay.textContent[tempDisplay.textContent.length - 2])) {
                 tempDisplay.textContent = tempDisplay.textContent.slice(0,tempDisplay.textContent.length-3)
             }
             tempDisplay.textContent += " + ";
@@ -225,6 +250,7 @@ function handleButtonClick(value) {
                  {break}
             mainDisplay.textContent = calculateResult(tempDisplay.textContent);
             tempDisplay.textContent += " = ";
+            operatorUsed = 0;
             dotCount=0;
             break;
         case "C":
@@ -242,7 +268,6 @@ function handleButtonClick(value) {
                 dotCount=0;
                 break;}
     }
-    //programmer les boutons manquants
 }
 
 function operate(op,a,b){
