@@ -25,24 +25,20 @@ function equal(a) {
 
 buttons.addEventListener("click", (event) => {
     const target = event.target;
-    let buttonValue ="";
-
     if (target.classList.contains("button")) {
-        buttonValue = target.textContent;
+        handleButtonClick(target.textContent);
     }
-
-    handleButtonClick(buttonValue);
 });
 
-
 function handleButtonClick(value) {
+    if (tempDisplay.textContent[tempDisplay.textContent.length - 2]==="=" && /[0-9]|\,|\+\/-/.test(value)){
+        mainDisplay.textContent = "0";
+        tempDisplay.textContent = "";
+        operatorUsed=0;
+    }
+    
     switch (value){
         case "0":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
-                mainDisplay.textContent = "0";
-                tempDisplay.textContent = "";
-                operatorUsed=0;
-            }
             tempDisplay.textContent += 0;
             break;
         case "1":
@@ -54,67 +50,27 @@ function handleButtonClick(value) {
             tempDisplay.textContent += 1;
             break;
         case "2":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
-                mainDisplay.textContent = "0";
-                tempDisplay.textContent = "";
-                operatorUsed=0;
-            }
             tempDisplay.textContent += 2;
             break;
         case "3":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
-                mainDisplay.textContent = "0";
-                tempDisplay.textContent = "";
-                operatorUsed=0;
-            }
             tempDisplay.textContent += 3;
             break;
         case "4":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
-                mainDisplay.textContent = "0";
-                tempDisplay.textContent = "";
-                operatorUsed=0;
-            }
             tempDisplay.textContent += 4;
             break;
         case "5":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
-                mainDisplay.textContent = "0";
-                tempDisplay.textContent = "";
-                operatorUsed=0;
-            }
             tempDisplay.textContent += 5;
             break;
         case "6":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
-                mainDisplay.textContent = "0";
-                tempDisplay.textContent = "";
-                operatorUsed=0;
-            }
             tempDisplay.textContent += 6;
             break;
         case "7":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
-                mainDisplay.textContent = "0";
-                tempDisplay.textContent = "";
-                operatorUsed=0;
-            }
             tempDisplay.textContent += 7;
             break;
         case "8":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
-                mainDisplay.textContent = "0";
-                tempDisplay.textContent = "";
-                operatorUsed=0;
-            }
             tempDisplay.textContent += 8;
             break;
         case "9":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
-                mainDisplay.textContent = "0";
-                tempDisplay.textContent = "";
-                operatorUsed=0;
-            }
             tempDisplay.textContent += 9;
             break;
         case "+/-":
@@ -146,12 +102,6 @@ function handleButtonClick(value) {
             }
             break;
         case ",":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
-                mainDisplay.textContent = "0";
-                tempDisplay.textContent = "";
-                operatorUsed=0;
-                dotCount=0;
-            }
             if (tempDisplay.textContent === "") {
                 tempDisplay.textContent += 0;
             };
