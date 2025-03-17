@@ -59,10 +59,8 @@ function handleButtonClick(value) {
                 tempDisplay.textContent += 0;
             };
             if (tempDisplay.textContent[tempDisplay.textContent.length - 1] ==" "){
-                let tempString = tempDisplay.textContent.split(" ");
-                let num1 = tempString[0];
-                let operator = tempString[1];
-                tempDisplay.textContent = `${num1} ${operator} 0.`;
+                tempDisplay.textContent += "0.";
+                dotCount++;
                 break;
             }
             if (tempDisplay.textContent[tempDisplay.textContent.length-1] !=="." && dotCount < 1){
@@ -75,75 +73,24 @@ function handleButtonClick(value) {
             }
             break;
         case "%":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
-                tempDisplay.textContent = mainDisplay.textContent + " / ";
-                break;
-            }
-            if (/[0-9\.]/.test(tempDisplay.textContent[tempDisplay.textContent.length - 1]) && operatorUsed >=1 ){
-                mainDisplay.textContent = calculateResult(tempDisplay.textContent);
-                tempDisplay.textContent = mainDisplay.textContent + " / ";
-                dotCount=0;
-                break;
-            }
-            if (regexOperator.test(tempDisplay.textContent[tempDisplay.textContent.length - 2])) {
-                tempDisplay.textContent = tempDisplay.textContent.slice(0,tempDisplay.textContent.length-3)
-            }
-            tempDisplay.textContent += " / ";
-            dotCount=0;
-            operatorUsed += 1;
-            break;
         case "x":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
-                tempDisplay.textContent = mainDisplay.textContent + " x ";
-                break;
-            }
-            if (/[0-9\.]/.test(tempDisplay.textContent[tempDisplay.textContent.length - 1]) && operatorUsed >=1 ){
-                mainDisplay.textContent = calculateResult(tempDisplay.textContent);
-                tempDisplay.textContent = mainDisplay.textContent + " x ";
-                dotCount=0;
-                break;
-            }
-            if (regexOperator.test(tempDisplay.textContent[tempDisplay.textContent.length - 2])) {
-                tempDisplay.textContent = tempDisplay.textContent.slice(0,tempDisplay.textContent.length-3)
-            }
-            tempDisplay.textContent += " x ";
-            dotCount=0;
-            operatorUsed += 1;
-            break;
-        case "-":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
-                tempDisplay.textContent = mainDisplay.textContent + " - ";
-                break;
-            }
-            if (/[0-9\.]/.test(tempDisplay.textContent[tempDisplay.textContent.length - 1]) && operatorUsed >=1 ){
-                mainDisplay.textContent = calculateResult(tempDisplay.textContent);
-                tempDisplay.textContent = mainDisplay.textContent + " - ";
-                dotCount=0;
-                break;
-            }
-            if (regexOperator.test(tempDisplay.textContent[tempDisplay.textContent.length - 2])) {
-                tempDisplay.textContent = tempDisplay.textContent.slice(0,tempDisplay.textContent.length-3)
-            }
-            tempDisplay.textContent += " - ";
-            operatorUsed += 1;
-            dotCount=0;
-            break;
         case "+":
-            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
-                tempDisplay.textContent = mainDisplay.textContent + " + ";
-                operatorUsed += 1;
-                break;
-            }
+        case "-":    
             if (/[0-9\.]/.test(tempDisplay.textContent[tempDisplay.textContent.length - 1]) && operatorUsed >=1 ){
-                mainDisplay.textContent = calculateResult(tempDisplay.textContent);
-                tempDisplay.textContent = mainDisplay.textContent + " + ";
-                dotCount=0;
+            mainDisplay.textContent = calculateResult(tempDisplay.textContent);
+            tempDisplay.textContent = mainDisplay.textContent + " " + value + " ";
+            dotCount=0;
+            break;
+            }
+            if (tempDisplay.textContent[tempDisplay.textContent.length - 2]=="="){
+                tempDisplay.textContent = mainDisplay.textContent + " " + value + " ";
+                operatorUsed++;
                 break;
             }
             if (regexOperator.test(tempDisplay.textContent[tempDisplay.textContent.length - 2])) {
                 tempDisplay.textContent = tempDisplay.textContent.slice(0,tempDisplay.textContent.length-3)
-            }
-            tempDisplay.textContent += " + ";
+                }
+            tempDisplay.textContent += " " + value + " ";
             dotCount=0;
             operatorUsed += 1;
             break;
