@@ -42,33 +42,18 @@ function handleButtonClick(value) {
     
     switch (value){
         case "+/-":
-            if (operatorUsed == 0){
-                if (tempDisplay.textContent[0]==="-") {
-                    tempDisplay.textContent = tempDisplay.textContent.slice(1);
-                    break;
-                }
-                else {tempDisplay.textContent = "-" + tempDisplay.textContent;
-                    break;
-                }
+            if (operatorUsed === 0){
+                tempDisplay.textContent = tempDisplay.textContent[0]==="-" ? tempDisplay.textContent.slice(1) : "-" + tempDisplay.textContent;
             }
             else if (operatorUsed > 0 && tempDisplay.textContent[tempDisplay.textContent.length - 2]!=="=") {
-                let tempString = tempDisplay.textContent.split(" ");
-                let num1 = tempString[0];
-                let operator = tempString[1];
-                let num2 = tempString[2];
+                let [num1, operator, num2] =tempDisplay.textContent.split(" ");
                 tempDisplay.textContent = `${num1} ${operator} ${-num2}`;
-                break;
             }
             else {
-                if (mainDisplay.textContent[0]==="-") {
-                    mainDisplay.textContent = mainDisplay.textContent.slice(1);
-                    break;
-                }
-                else {mainDisplay.textContent = "-" + mainDisplay.textContent;
-                    break;
-                }
+                mainDisplay.textContent = mainDisplay.textContent[0] === "-" ? mainDisplay.textContent.slice(1) : "-" + mainDisplay.textContent;
             }
             break;
+            
         case ",":
             if (tempDisplay.textContent === "") {
                 tempDisplay.textContent += 0;
